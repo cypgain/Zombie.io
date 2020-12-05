@@ -106,7 +106,7 @@ public class Simulator {
     private void initialize(EnvironmentDescription ed) {
         counter = 0;
         timer = null;
-        setFramesPerSecond(20);
+        setFramesPerSecond(30);
         setVirtualTimeFactor(1);
         fps = new FrameMeter();
         agents = new ArrayList();

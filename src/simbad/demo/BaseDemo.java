@@ -24,6 +24,7 @@ import javax.vecmath.Vector3d;
 import javax.vecmath.Vector3f;
 
 import simbad.sim.*;
+import zombie.entities.Player;
 /** A Basic demo with camera sensor, sonars and bumpers.
  * The robot wanders and stops when it collides.
  *
@@ -79,7 +80,6 @@ public class BaseDemo extends Demo {
         Box b1 = new Box(new Vector3d(-3, 0, -3), new Vector3f(1, 1, 1), this);
         add(b1);
         add( new Arch(new Vector3d(3, 0, -3), this));
-        add(new Robot(new Vector3d(0, 0, 0), "robot 1"));
-       
+        add(new Player(new Vector3d(0, 0, 0)));
     }
 }
