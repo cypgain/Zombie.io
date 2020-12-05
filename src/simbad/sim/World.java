@@ -141,6 +141,7 @@ public  class World   {
         viewTransformGroup = new TransformGroup();
         viewTransformGroup.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
         viewTransformGroup.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
+
         Transform3D t3d =new Transform3D();
         t3d.setIdentity();
         viewTransformGroup.setTransform(t3d);
