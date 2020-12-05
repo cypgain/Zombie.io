@@ -12,15 +12,14 @@ import zombie.ZombieGame;
 
 public class Player extends LivingEntity
 {
-
-	private int speed;
 	
 	public Player(Vector3d pos, Color3f color) 
 	{
-		super(100, pos, "player", color);
-		this.speed = 2;
-		this.setColor(color);
+		super(100, 5, pos, "player", new Color3f(0f, 0.5f, 0.1f));
+		
+    this.setColor(this.color);
 		this.setCanBeTraversed(true);
+
 		this.registerActions();
 	}
 	

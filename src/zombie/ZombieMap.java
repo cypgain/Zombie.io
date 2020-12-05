@@ -95,6 +95,7 @@ public class ZombieMap
 				{
 					box = new Box(new Vector3d(x - startX - 1, -0.99f, y - startY + 1), new Vector3f(1, 1, 1), env);
 					box.setColor(new Color3f(0.1f, 0.1f, 0.7f));
+					box.setCanBeTraversed(true);
 					this.spawners.add(box);
 					env.add(box);
 				}

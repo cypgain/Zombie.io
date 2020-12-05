@@ -4,23 +4,21 @@ import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Set;
 import java.util.stream.Collectors;
-
 import javax.vecmath.Color3f;
 import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;
-
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
-
 import simbad.sim.RangeSensorBelt;
 import simbad.sim.RobotFactory;
 import simbad.sim.SimpleAgent;
 import zombie.ZombieGame;
 
 
-public class Zombie extends LivingEntity {
+public class Zombie extends LivingEntity 
+{
 	RangeSensorBelt sonars;
 	RangeSensorBelt bumpers;
 	
@@ -38,7 +36,8 @@ public class Zombie extends LivingEntity {
 	
 	//Attributs pour le pathfinding :
 
-	public Zombie(int defaultHealth, Vector3d pos, String name, Color3f color, Player target) {
+	public Zombie(int defaultHealth, Vector3d pos, String name, Color3f color, Player target) 
+  {
 		super(defaultHealth, pos, name, color);
 		sonars = RobotFactory.addSonarBeltSensor(this, 12);
 		bumpers = RobotFactory.addBumperBeltSensor(this, 12);

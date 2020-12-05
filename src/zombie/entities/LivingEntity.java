@@ -6,14 +6,16 @@ import javax.vecmath.Vector3d;
 public class LivingEntity extends Entity
 {
 
-	private int health;
-	private Color3f color;
+	protected Color3f color;
+	protected int health;
+	protected int speed;
 	
-	public LivingEntity(int defaultHealth, Vector3d pos, String name, Color3f color)
+	public LivingEntity(int defaultHealth, int speed, Vector3d pos, String name, Color3f color)
 	{
 		super(pos, name);
 		this.health = defaultHealth;
-		this.color = color;
+		this.speed = speed;
+    this.color = color;
 	}
 	
 	public int getHealth()

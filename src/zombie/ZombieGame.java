@@ -52,6 +52,7 @@ public class ZombieGame extends JFrame
         
         this.simulator = new Simulator(new JDesktopPane(), this.world, this.env);
         this.simulator.startSimulation();
+
         
         JPanel panel = new JPanel();
 		panel.setLayout(new BorderLayout());
@@ -82,6 +83,11 @@ public class ZombieGame extends JFrame
     public ActionMap getActionMap()
     {
     	return this.actionMap;
+    }
+    
+    public Simulator getSimulator()
+    {
+    	return this.simulator;
     }
     
     public static ZombieGame getInstance()

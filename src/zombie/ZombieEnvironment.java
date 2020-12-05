@@ -1,6 +1,8 @@
 package zombie;
 
 import javax.vecmath.Color3f;
+import java.util.ArrayList;
+import java.util.List;
 import javax.vecmath.Vector3d;
 
 import simbad.sim.EnvironmentDescription;
@@ -12,11 +14,13 @@ public class ZombieEnvironment extends EnvironmentDescription
 	
 	private ZombieMap currentMap;
 	private Player player;
-	private Zombie zombie1;
-	private Zombie zombie2;
+	private List<Zombie> zombies;
+	private int currentRound;
+	private int zombiesThisRound;
 	
 	public ZombieEnvironment()
 	{
+        this.setUsePhysics(false);
 		this.showAxis(false);
 		
 		this.currentMap = new ZombieMap("map");
@@ -25,13 +29,40 @@ public class ZombieEnvironment extends EnvironmentDescription
 		this.player = new Player(new Vector3d(0, 0, 0), new Color3f(255,255,255));
 		this.add(this.player);
 		
-		this.zombie1 = new Zombie(100, new Vector3d(2,0,2), "zombie", new Color3f(0,255,0), player);
-		this.add(this.zombie1);
+		this.zombies = new ArrayList<>();
+		this.currentRound = 1;
+		this.zombiesThisRound = 5;
 		
-		this.zombie2 = new Zombie(100, new Vector3d(5,0,2), "zombie",  new Color3f(0,255,0), player);
-		this.add(this.zombie2);
+		ZombieSpawner spawner = new ZombieSpawner(this, this.currentMap.getSpawners());
+		new Thread(spawner).start();
 	}
 	
-	public ZombieMap getMap(){return this.currentMap;}
+	public void spawnZombie(Vector3d position)
+	{
+		Zombie zombie = new Zombie(position);
+		this.zombies.add(zombie);
+		ZombieGame.getInstance().getSimulator().addAgent(zombie);
+	}
+	
+	public void nextRound()
+	{
+		currentRound++;
+		zombiesThisRound += 2;
+	}
+	
+	public int getZombiesThisRound()
+	{
+		return this.zombiesThisRound;
+	}
+	
+	public ZombieMap getMap()
+  {
+    return this.currentMap;
+  }
 
+	public List<Zombie> getZombies()
+	{
+		return this.zombies;
+	}
+	
 }
