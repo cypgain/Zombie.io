@@ -1,8 +1,8 @@
 package zombie;
 
+import javax.vecmath.Color3f;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.vecmath.Vector3d;
 
 import simbad.sim.EnvironmentDescription;
@@ -26,7 +26,7 @@ public class ZombieEnvironment extends EnvironmentDescription
 		this.currentMap = new ZombieMap("map");
 		this.currentMap.render(this);
 		
-		this.player = new Player(new Vector3d(0, 0, 0));
+		this.player = new Player(new Vector3d(0, 0, 0), new Color3f(255,255,255));
 		this.add(this.player);
 		
 		this.zombies = new ArrayList<>();
@@ -54,6 +54,11 @@ public class ZombieEnvironment extends EnvironmentDescription
 	{
 		return this.zombiesThisRound;
 	}
+	
+	public ZombieMap getMap()
+  {
+    return this.currentMap;
+  }
 
 	public List<Zombie> getZombies()
 	{

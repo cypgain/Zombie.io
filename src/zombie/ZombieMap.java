@@ -113,4 +113,5 @@ public class ZombieMap
 		return this.spawners;
 	}
 	
+	public int[][] getArrayMap(){return this.map;}	
 }

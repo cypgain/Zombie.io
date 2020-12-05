@@ -1,73 +1,94 @@
 package zombie.entities;
 
-import javax.media.j3d.Transform3D;
+import java.util.Map;
+import java.util.PriorityQueue;
+import java.util.Set;
+import java.util.stream.Collectors;
 import javax.vecmath.Color3f;
 import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;
-
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
 import simbad.sim.RangeSensorBelt;
 import simbad.sim.RobotFactory;
+import simbad.sim.SimpleAgent;
+import zombie.ZombieGame;
 
-public class Zombie extends LivingEntity
-{	
-    Point3d coords = new Point3d();
-    Point3d prev = new Point3d();
-    Transform3D t3d = new Transform3D();
 
-    RangeSensorBelt sonars, bumpers;
-
-    boolean stop = false;
-
+public class Zombie extends LivingEntity 
+{
+	RangeSensorBelt sonars;
+	RangeSensorBelt bumpers;
 	
-	public Zombie(Vector3d pos) 
-	{
-		super(100, 20, pos, "zombie");
+	
+	final float ZOMBIE_WALKING_SPEED = 0.2f;
+	final float ZOMBIE_RUNNING_SPEED = 1f;
+	
+	private Player target;
+	
+	private Point3d playerPos;
+	private Point3d zombiePos;
+	
+	private ZombieGame game;
+	
+	
+	//Attributs pour le pathfinding :
+
+	public Zombie(int defaultHealth, Vector3d pos, String name, Color3f color, Player target) 
+  {
+		super(defaultHealth, pos, name, color);
+		sonars = RobotFactory.addSonarBeltSensor(this, 12);
+		bumpers = RobotFactory.addBumperBeltSensor(this, 12);
+		this.target = target;
+		
+		this.playerPos = new Point3d();
+		this.zombiePos = new Point3d();
 		
 		this.setCanBeTraversed(true);
+		this.setColor(color);
 		
-        this.bumpers = RobotFactory.addBumperBeltSensor(this, 12);
-        this.sonars = RobotFactory.addSonarBeltSensor(this, 12);
-        
-        this.setColor(new Color3f(0.2f, 0.2f, 0.7f));
+		game = ZombieGame.getInstance();
 	}
 	
-	@Override
-	public void performBehavior()
-	{		
-		this.setTranslationalVelocity(this.speed);
+	public void initBehavior() {
+	}
+	
+	public void performBehavior() {
 		
-        if (this.bumpers.oneHasHit()) 
-        {
-        	this.setTranslationalVelocity(-0.1);
-        	this.setRotationalVelocity(0.5 - (0.1 * Math.random()));
-        } 
-        else if (this.sonars.oneHasHit()) 
-        {
-            // reads the three front quadrants
-            double left = this.sonars.getFrontLeftQuadrantMeasurement();
-            double right = this.sonars.getFrontRightQuadrantMeasurement();
-            double front = this.sonars.getFrontQuadrantMeasurement();
-            
-            // if obstacle near
-            if ((front < 0.7) || (left < 0.7) || (right < 0.7)) 
-            {
-                if (left < right)
-                	this.setRotationalVelocity(-1 - (0.1 * Math.random()));
-                else
-                	this.setRotationalVelocity(1 - (0.1 * Math.random()));
-                this.setTranslationalVelocity(0);
-            } 
-            else 
-            {
-            	this.setRotationalVelocity(0);
-            	this.setTranslationalVelocity(0.6);
-            }
-        } 
-        else 
-        {
-        	this.setTranslationalVelocity(0.8);
-        	this.setRotationalVelocity(0);
-        }
+		setRotationalVelocity(0);
+		target.getCoords(playerPos);
+		this.getCoords(zombiePos);
+		
+		setTranslationalVelocity(ZOMBIE_WALKING_SPEED);
+		
+		if (sonars.oneHasHit()){
+			double left = sonars.getFrontLeftQuadrantMeasurement();
+			double right = sonars.getFrontRightQuadrantMeasurement();
+			double front = sonars.getFrontQuadrantMeasurement();
+			
+			if ((front > 0.1)||(left > 0.1)||(right > 0.1)) 
+			{
+				if (left < right)
+					setRotationalVelocity(-1);
+				else
+					setRotationalVelocity(1) ;
+			}
+		}
+		
+		if(anOtherAgentIsVeryNear())
+		{
+			System.out.println("ca touche la ptn oh");
+			SimpleAgent sA = getVeryNearAgent();
+			if(sA instanceof Player)
+			{
+				LivingEntity lE = (LivingEntity)sA;
+				lE.takeDamage(10);
+			}
+		}
+		
 	}
 
+	
 }
