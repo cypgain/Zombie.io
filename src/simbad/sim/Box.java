@@ -39,6 +39,8 @@ public class Box extends BlockWorldObject {
     /** Object dimension.s */
     float sx,sy,sz;
      
+    private Vector3d position;
+    
     /** Constructs a box object.
      * 
      * @param pos position of the center of the object. 
@@ -61,6 +63,8 @@ public class Box extends BlockWorldObject {
         this.sy = extent.y;
         this.sz = extent.z;
         // put it on the floor
+        this.position = pos;
+        
         pos.y += sy/2;
         create3D(wd,color);
         translateTo(pos);
@@ -89,6 +93,11 @@ public class Box extends BlockWorldObject {
 	    setColor(color);
 	    addChild(box);
       
+    }
+    
+    public Vector3d getPosition()
+    {
+    	return this.position;
     }
 
 }
