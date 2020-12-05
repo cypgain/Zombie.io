@@ -5,12 +5,14 @@ import javax.vecmath.Vector3d;
 public class LivingEntity extends Entity
 {
 
-	private int health;
+	protected int health;
+	protected int speed;
 	
-	public LivingEntity(int defaultHealth, Vector3d pos, String name)
+	public LivingEntity(int defaultHealth, int speed, Vector3d pos, String name)
 	{
 		super(pos, name);
 		this.health = defaultHealth;
+		this.speed = speed;
 	}
 	
 	public int getHealth()
