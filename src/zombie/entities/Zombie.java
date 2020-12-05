@@ -79,11 +79,11 @@ public class Zombie extends LivingEntity
 		if(anOtherAgentIsVeryNear())
 		{
 			System.out.println("ca touche la ptn oh");
-			SimpleAgent sA = getVeryNearAgent();
-			if(sA instanceof Player)
+			SimpleAgent sa = getVeryNearAgent();
+			if(sa instanceof Player)
 			{
-				LivingEntity lE = (LivingEntity)sA;
-				lE.takeDamage(10);
+				LivingEntity le = (LivingEntity)sa;
+				le.takeDamage(10);
 			}
 		}
 		
