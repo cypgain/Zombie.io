@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
+import javax.vecmath.Color3f;
 import javax.vecmath.Vector3d;
 
 import zombie.Actions;
@@ -14,11 +15,12 @@ public class Player extends LivingEntity
 
 	private int speed;
 	
-	public Player(Vector3d pos) 
+	public Player(Vector3d pos, Color3f color) 
 	{
-		super(100, pos, "player");
-		this.speed = 5;
-		
+		super(100, pos, "player", color);
+		this.speed = 2;
+		this.setColor(color);
+		this.setCanBeTraversed(true);
 		this.registerActions();
 	}
 	
@@ -100,5 +102,8 @@ public class Player extends LivingEntity
 			}
 		});
 	}
+	
+	
+	
 	
 }

@@ -89,6 +89,11 @@ public class ZombieGame extends JFrame
     	return ZombieGame.instance;
     }
     
+    public ZombieEnvironment getEnv()
+    {
+    	return this.env;
+    }
+    
     public static void main(String[] args)
     {
     	new ZombieGame();
