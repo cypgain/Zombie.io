@@ -34,6 +34,8 @@ import javax.media.j3d.VirtualUniverse;
 import javax.swing.JComponent;
 import javax.swing.JInternalFrame;
 
+import zombie.entities.Zombie;
+
 
 
 /**
@@ -157,6 +159,17 @@ public class Simulator {
             }
         }
     }
+    
+    public void addAgent(SimpleAgent agent)
+    {
+        agent.setSimulator(this);
+        agent.setWorld(world);
+        agent.create();
+        agent.reset();
+        agents.add(agent);
+        world.addObjectToPickableSceneBranch(agent);   
+    }
+    
     /** Creates the UI that may be associated to each agent.
      * If the agent has set a Panel with setUIPanel a window is created containing the panel.
      * Only called once.

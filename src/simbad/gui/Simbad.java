@@ -210,7 +210,7 @@ public class Simbad extends JFrame implements ActionListener {
         //request antialising 
         System.setProperty("j3d.implicitAntialiasing", "true");
 
-        new Simbad(new simbad.demo.BaseDemo() ,backgroundMode);
+        new Simbad(new simbad.demo.SingleAvoiderDemo() ,backgroundMode);
      }
 
 
