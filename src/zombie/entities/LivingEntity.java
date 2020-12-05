@@ -15,7 +15,7 @@ public class LivingEntity extends Entity
 		super(pos, name);
 		this.health = defaultHealth;
 		this.speed = speed;
-    this.color = color;
+		this.color = color;
 	}
 	
 	public int getHealth()
@@ -30,7 +30,7 @@ public class LivingEntity extends Entity
 	
 	public void takeDamage(int damage)
 	{
-		this.setColor(new Color3f(255,0,0));
+		this.setColor(new Color3f(1f, 0f, 0f));
 		this.setHealth(damage);
 		this.setColor(color);
 	}

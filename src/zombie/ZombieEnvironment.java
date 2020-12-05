@@ -39,7 +39,7 @@ public class ZombieEnvironment extends EnvironmentDescription
 	
 	public void spawnZombie(Vector3d position)
 	{
-		Zombie zombie = new Zombie(position);
+		Zombie zombie = new Zombie(position, this.player);
 		this.zombies.add(zombie);
 		ZombieGame.getInstance().getSimulator().addAgent(zombie);
 	}
@@ -56,9 +56,9 @@ public class ZombieEnvironment extends EnvironmentDescription
 	}
 	
 	public ZombieMap getMap()
-  {
-    return this.currentMap;
-  }
+	{
+		return this.currentMap;
+	}
 
 	public List<Zombie> getZombies()
 	{

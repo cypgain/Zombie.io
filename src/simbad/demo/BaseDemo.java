@@ -80,6 +80,5 @@ public class BaseDemo extends Demo {
         Box b1 = new Box(new Vector3d(-3, 0, -3), new Vector3f(1, 1, 1), this);
         add(b1);
         add( new Arch(new Vector3d(3, 0, -3), this));
-        add(new Player(new Vector3d(0, 0, 0)));
     }
 }

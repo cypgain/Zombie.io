@@ -19,12 +19,11 @@ import zombie.ZombieGame;
 
 public class Zombie extends LivingEntity 
 {
-	RangeSensorBelt sonars;
-	RangeSensorBelt bumpers;
+	private RangeSensorBelt sonars;
+	private RangeSensorBelt bumpers;
 	
-	
-	final float ZOMBIE_WALKING_SPEED = 0.2f;
-	final float ZOMBIE_RUNNING_SPEED = 1f;
+	private final float ZOMBIE_WALKING_SPEED = 0.2f;
+	private final float ZOMBIE_RUNNING_SPEED = 1f;
 	
 	private Player target;
 	
@@ -32,13 +31,10 @@ public class Zombie extends LivingEntity
 	private Point3d zombiePos;
 	
 	private ZombieGame game;
-	
-	
-	//Attributs pour le pathfinding :
 
-	public Zombie(int defaultHealth, Vector3d pos, String name, Color3f color, Player target) 
-  {
-		super(defaultHealth, pos, name, color);
+	public Zombie(Vector3d pos, Player target) 
+	{
+		super(100, 5, pos, "zombie", new Color3f(0.3f, 0.2f, 0.7f));
 		sonars = RobotFactory.addSonarBeltSensor(this, 12);
 		bumpers = RobotFactory.addBumperBeltSensor(this, 12);
 		this.target = target;
@@ -52,18 +48,21 @@ public class Zombie extends LivingEntity
 		game = ZombieGame.getInstance();
 	}
 	
-	public void initBehavior() {
+	public void initBehavior() 
+	{
+		
 	}
 	
-	public void performBehavior() {
-		
+	public void performBehavior() 
+	{
 		setRotationalVelocity(0);
 		target.getCoords(playerPos);
 		this.getCoords(zombiePos);
 		
 		setTranslationalVelocity(ZOMBIE_WALKING_SPEED);
 		
-		if (sonars.oneHasHit()){
+		if (sonars.oneHasHit())
+		{
 			double left = sonars.getFrontLeftQuadrantMeasurement();
 			double right = sonars.getFrontRightQuadrantMeasurement();
 			double front = sonars.getFrontQuadrantMeasurement();
