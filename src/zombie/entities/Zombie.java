@@ -7,7 +7,10 @@ import java.util.stream.Collectors;
 import javax.vecmath.Color3f;
 import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;
+import javax.vecmath.Vector3f;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -15,6 +18,11 @@ import simbad.sim.RangeSensorBelt;
 import simbad.sim.RobotFactory;
 import simbad.sim.SimpleAgent;
 import zombie.ZombieGame;
+import zombie.ZombieMap;
+import zombie.entities.pathfinding.Grid;
+import zombie.entities.pathfinding.Node;
+import zombie.entities.pathfinding.PathFinding;
+import zombie.entities.pathfinding.Point;
 
 
 public class Zombie extends LivingEntity 
@@ -45,16 +53,58 @@ public class Zombie extends LivingEntity
 		this.setCanBeTraversed(true);
 		this.setColor(color);
 		
-		game = ZombieGame.getInstance();
+		this.game = ZombieGame.getInstance();
 	}
 	
-	public void initBehavior() 
-	{
+	public Point getNextPoint()
+	{		
+		boolean[][] map = this.game.getEnv().getMap().getBoolMap();
 		
+		Vector3f zombiePos = this.getPositionInGrid();
+		Vector3f playerPos = this.target.getPositionInGrid();
+		
+		Grid grid = new Grid(map.length, map[0].length, map);
+		
+		Point start  = new Point((int)zombiePos.x, (int)zombiePos.z);
+		Point target = new Point((int)playerPos.x, (int)playerPos.z);
+		
+		System.out.println("Width: " + map.length + " Height: " + map[0].length);
+		System.out.println("Start: " + start);
+		System.out.println("Dest: " + target);
+		
+		List<Point> path = PathFinding.findPath(grid, start, target, false);
+		
+		int[][] testPath = this.game.getEnv().getMap().getArrayMap();
+
+		
+		for (Point point : path)
+		{
+			System.out.println(point);
+			testPath[point.y][point.x] = 5;
+		}
+		
+		testPath[start.y][start.x] = 8;
+		testPath[target.y][target.x] = 9;
+		
+		for (int y = 0; y < testPath.length; y++)
+		{
+			for (int x = 0; x < testPath[y].length; x++)
+			{
+				System.out.print(testPath[y][x]);
+			}
+			
+			System.out.println();
+		}
+		
+		if (path.size() == 0)
+			return null;
+		else
+			return path.get(0);
 	}
 	
 	public void performBehavior() 
 	{
+		/*
 		setRotationalVelocity(0);
 		target.getCoords(playerPos);
 		this.getCoords(zombiePos);
@@ -78,7 +128,6 @@ public class Zombie extends LivingEntity
 		
 		if(anOtherAgentIsVeryNear())
 		{
-			System.out.println("ca touche la ptn oh");
 			SimpleAgent sa = getVeryNearAgent();
 			if(sa instanceof Player)
 			{
@@ -86,7 +135,7 @@ public class Zombie extends LivingEntity
 				le.takeDamage(10);
 			}
 		}
-		
+		*/
 	}
 
 	

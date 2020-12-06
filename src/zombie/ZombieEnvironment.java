@@ -26,12 +26,12 @@ public class ZombieEnvironment extends EnvironmentDescription
 		this.currentMap = new ZombieMap("map");
 		this.currentMap.render(this);
 		
-		this.player = new Player(new Vector3d(0, 0, 0), new Color3f(255,255,255));
+		this.player = new Player(new Vector3d(0, 0.1f, 0), new Color3f(255,255,255));
 		this.add(this.player);
 		
 		this.zombies = new ArrayList<>();
 		this.currentRound = 1;
-		this.zombiesThisRound = 5;
+		this.zombiesThisRound = 1;
 		
 		ZombieSpawner spawner = new ZombieSpawner(this, this.currentMap.getSpawners());
 		new Thread(spawner).start();

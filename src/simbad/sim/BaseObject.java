@@ -177,7 +177,7 @@ public  abstract class BaseObject {
         group.addChild(node);
       }
 
-    Vector3f getTranslation() {
+    protected Vector3f getTranslation() {
         Vector3f v = new Vector3f();
         translation.get(v);
         return v;

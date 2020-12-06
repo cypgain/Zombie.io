@@ -5,6 +5,8 @@ import java.util.List;
 import javax.vecmath.Vector3d;
 
 import simbad.sim.Box;
+import zombie.entities.Zombie;
+import zombie.entities.pathfinding.Point;
 
 public class ZombieSpawner implements Runnable
 {
@@ -13,20 +15,26 @@ public class ZombieSpawner implements Runnable
 	private List<Box> spawners;
 	private int totalZombiesSpawned;
 	
+	private int startX;
+	private int startY;
+	
 	public ZombieSpawner(ZombieEnvironment env, List<Box> spawners)
 	{
 		this.env = env;
 		this.spawners = spawners;
 		this.totalZombiesSpawned = 0;
+		
+		this.startX = this.env.getMap().getArrayMap().length;
+		this.startY = this.env.getMap().getArrayMap()[0].length;
 	}
 	
 	@Override
 	public void run() 
 	{				
-		try { Thread.sleep(3000); } catch(Exception e) { e.printStackTrace(); }
+		try { Thread.sleep(1000); } catch(Exception e) { e.printStackTrace(); }
 		
 		while (true)
-		{						
+		{							
 			if (this.env.getZombies().size() == 0 && this.totalZombiesSpawned >= this.env.getZombiesThisRound())
 			{
 				this.totalZombiesSpawned = 0;
@@ -36,7 +44,7 @@ public class ZombieSpawner implements Runnable
 			else if (this.totalZombiesSpawned < this.env.getZombiesThisRound())
 			{
 				Vector3d pos = this.spawners.get((int)(Math.random() * this.spawners.size())).getPosition();
-				Vector3d newPos = new Vector3d(pos.x, pos.y, pos.z + 1);
+				Vector3d newPos = new Vector3d(pos.x, 0.1f, pos.z);
 				this.env.spawnZombie(newPos);
 				this.totalZombiesSpawned++;
 			}

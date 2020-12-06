@@ -17,7 +17,7 @@ public class Player extends LivingEntity
 	{
 		super(100, 5, pos, "player", new Color3f(0f, 0.5f, 0.1f));
 		
-    this.setColor(this.color);
+		this.setColor(this.color);
 		this.setCanBeTraversed(true);
 
 		this.registerActions();

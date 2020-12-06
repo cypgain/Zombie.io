@@ -12,6 +12,7 @@ import javax.vecmath.Vector3d;
 import javax.vecmath.Vector3f;
 
 import simbad.sim.Box;
+import zombie.entities.pathfinding.Node;
 
 public class ZombieMap 
 {
@@ -116,5 +117,22 @@ public class ZombieMap
 	public int[][] getArrayMap()
 	{
 		return this.map;
+	}
+	
+	public boolean[][] getBoolMap()
+	{
+		boolean[][] boolMap = new boolean[this.map.length][this.map[0].length];
+		
+		for (int y = 0; y < boolMap.length; y++)
+		{
+			for (int x = 0; x < boolMap[0].length; x++)
+			{
+				boolMap[y][x] = this.map[y][x] == 1 ? false : true;
+			}
+		}
+		
+		return boolMap;
 	}	
+	
 }
+
