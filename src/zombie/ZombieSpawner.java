@@ -36,7 +36,7 @@ public class ZombieSpawner implements Runnable
 			else if (this.totalZombiesSpawned < this.env.getZombiesThisRound())
 			{
 				Vector3d pos = this.spawners.get((int)(Math.random() * this.spawners.size())).getPosition();
-				Vector3d newPos = new Vector3d(pos.x, pos.y, pos.z + 1);
+				Vector3d newPos = new Vector3d(pos.x, 0.2f, pos.z);
 				this.env.spawnZombie(newPos);
 				this.totalZombiesSpawned++;
 			}
