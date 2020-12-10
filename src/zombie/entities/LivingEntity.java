@@ -10,6 +10,8 @@ public class LivingEntity extends Entity
 	protected int health;
 	protected int speed;
 	
+	
+	
 	public LivingEntity(int defaultHealth, int speed, Vector3d pos, String name, Color3f color)
 	{
 		super(pos, name);
@@ -31,8 +33,10 @@ public class LivingEntity extends Entity
 	public void takeDamage(int damage)
 	{
 		this.setColor(new Color3f(1f, 0f, 0f));
-		this.setHealth(damage);
+		this.setHealth(health-damage);
 		this.setColor(color);
 	}
+	
+	
 	
 }
