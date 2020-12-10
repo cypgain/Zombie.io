@@ -26,7 +26,7 @@ public class ZombieEnvironment extends EnvironmentDescription
 		this.currentMap = new ZombieMap("map");
 		this.currentMap.render(this);
 		
-		this.player = new Player(new Vector3d(0, 0, 0), new Color3f(255,255,255));
+		this.player = new Player(new Vector3d(0, 0.2f, 0), new Color3f(255,255,255));
 		this.add(this.player);
 		
 		this.zombies = new ArrayList<>();
