@@ -30,7 +30,9 @@ public class Player extends LivingEntity
 		if(instance != null)
 		{
 			System.out.println("erreur : il existe deja une instance de Player");
-		}else {
+		}
+		else 
+		{
 			instance = 	this;
 		}
 	}
@@ -40,7 +42,8 @@ public class Player extends LivingEntity
 		return Player.instance;
 	}
 	
-	public void performBehavior() {
+	public void performBehavior() 
+	{
 		if(anOtherAgentIsVeryNear())
 		{
 			
@@ -60,13 +63,16 @@ public class Player extends LivingEntity
 	
 	private void invincibility()
 	{
-		Thread tInvincibility = new Thread(new Runnable() {
-			public void run() {
+		Thread tInvincibility = new Thread(new Runnable() 
+		{
+			public void run() 
+			{
 				
 				System.out.println("START INvincible");
 				Player instance = Player.getInstance();
 				instance.isInvincible = true;
-				try {
+				try 
+				{
 					Thread.sleep(instance.INVINCIBILITY_TIME);
 				} catch (InterruptedException e) {}
 				
