@@ -44,6 +44,8 @@ public class Player extends LivingEntity
 	
 	public void performBehavior() 
 	{
+		System.out.println(this.getDirection());
+		
 		if(anOtherAgentIsVeryNear())
 		{
 			
@@ -59,6 +61,8 @@ public class Player extends LivingEntity
 				System.out.println("POINT DE VIE : " + this.health);
 			}
 		}
+		
+		super.performBehavior();
 	}
 	
 	private void invincibility()

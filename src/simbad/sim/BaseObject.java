@@ -99,7 +99,6 @@ public  abstract class BaseObject {
         t3d.setTranslation(t);
         translation.mul(t3d);
         translationGroup.setTransform(translation); 
-        
     }
 
     /** Rotates (relative to current rotation) the object about Y axis. */
@@ -109,6 +108,7 @@ public  abstract class BaseObject {
         rotation.mul(t3d);
         rotationGroup.setTransform(rotation);
     }
+   
    /** Resets translation and rotation transforms. */
    	void resetTransforms(){
         translation.setIdentity();

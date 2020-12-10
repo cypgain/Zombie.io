@@ -70,7 +70,7 @@ public  class SimpleAgent extends BaseObject {
     protected Transform3D t3d2 = new Transform3D();
     protected Transform3D t3d3 = new Transform3D();
       
-  
+    protected Point3d oldCoords = new Point3d(0, 0, 0);
     
     /** List of currently interacting agent */
     //private ArrayList interactingAgents;
@@ -292,10 +292,17 @@ public  class SimpleAgent extends BaseObject {
             delta = instantTranslation.length();
             odometer += delta;
             positionChanged = (delta != 0);
-            
        }
     }
   
+    public Point3d getDirection()
+    {    	
+    	Point3d currentCoords = new Point3d(0, 0, 0);
+    	this.getCoords(currentCoords);
+    	
+    	return new Point3d(currentCoords.x - this.oldCoords.x, 0, currentCoords.z - this.oldCoords.z);
+    }
+    
     
     /**
      * Checks for 3D geometrical collisions 
@@ -362,7 +369,10 @@ public  class SimpleAgent extends BaseObject {
     protected   void initBehavior() {}
     
     /** called by simulator loop */
-    protected   void performPreBehavior() {}
+    protected   void performPreBehavior() 
+    {
+        this.getCoords(this.oldCoords);
+    }
 
     /** called by simulator loop */
     protected  void performBehavior() {}
