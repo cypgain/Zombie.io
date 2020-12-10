@@ -34,7 +34,7 @@ public class Zombie extends LivingEntity
 
 	public Zombie(Vector3d pos, Player target) 
 	{
-		super(100, 5, pos, "zombie", new Color3f(0.3f, 0.2f, 0.7f));
+		super(100, 5, pos, "zombie", new Color3f(0.3f, 0.2f, 0.7f), 0.25f);
 		sonars = RobotFactory.addSonarBeltSensor(this, 12);
 		bumpers = RobotFactory.addBumperBeltSensor(this, 12);
 		this.target = target;
@@ -42,16 +42,13 @@ public class Zombie extends LivingEntity
 		this.playerPos = new Point3d();
 		this.zombiePos = new Point3d();
 		
-		this.setCanBeTraversed(true);
 		this.setColor(color);
 		
 		game = ZombieGame.getInstance();
+		
+		this.setCanBeTraversed(false);
 	}
 	
-	public void initBehavior() 
-	{
-		
-	}
 	
 	public void performBehavior() 
 	{

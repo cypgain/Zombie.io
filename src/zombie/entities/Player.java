@@ -5,10 +5,13 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
 import javax.vecmath.Color3f;
+import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;
 
 import simbad.sim.SimpleAgent;
+import simbad.sim.Simulator;
 import zombie.Actions;
+import zombie.ZombieEnvironment;
 import zombie.ZombieGame;
 
 public class Player extends LivingEntity
@@ -23,7 +26,7 @@ public class Player extends LivingEntity
 	
 	public Player(Vector3d pos, Color3f color) 
 	{
-		super(100, 5, pos, "player", new Color3f(0f, 0.5f, 0.1f));
+		super(100, 5, pos, "player", color, 0.4f);
 		
 		this.setColor(this.color);
 		this.setCanBeTraversed(true);
@@ -86,6 +89,16 @@ public class Player extends LivingEntity
 		});
 		tInvincibility.start();
 	}
+	
+	public void shoot()
+	{
+		Point3d p = new Point3d();
+		this.getCoords(p);
+		Bullet b = new Bullet(new Vector3d(p.getX(), p.getY(), p.getZ()), "Bullet", new Color3f(1f,1f,0f), 0.1f);	
+		Simulator sim = ZombieGame.getInstance().getSimulator();
+		sim.addAgent(b);
+	}
+	
 	
 	@SuppressWarnings("serial")
 	private void registerActions()
@@ -162,6 +175,15 @@ public class Player extends LivingEntity
 			public void actionPerformed(ActionEvent e) 
 			{
 				setRotationalVelocity(0);
+			}
+		});
+		
+		actionMap.put(Actions.SPACE, new AbstractAction() 
+		{
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
+				shoot();
 			}
 		});
 	}
