@@ -75,18 +75,6 @@ public class Zombie extends LivingEntity
 					setRotationalVelocity(1) ;
 			}
 		}
-		
-		if(anOtherAgentIsVeryNear())
-		{
-			SimpleAgent sa = getVeryNearAgent();
-			if(sa instanceof Player)
-			{
-				System.out.println("ca touche la ptn oh");
-				LivingEntity le = (LivingEntity)sa;
-				le.takeDamage(10);
-			}
-		}
-		
 	}
 
 	
