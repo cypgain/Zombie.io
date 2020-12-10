@@ -35,6 +35,7 @@ import javax.media.j3d.Node;
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
 import javax.vecmath.Color3f;
+import javax.vecmath.Matrix3f;
 import javax.vecmath.Vector3d;
 import javax.vecmath.Vector3f;
 
@@ -248,6 +249,27 @@ public  abstract class BaseObject {
     public void setColor(Color3f color){
         material.setDiffuseColor(color);
         material.setAmbientColor(color);
+    }
+    
+    public double getRadians()
+    {
+        Matrix3f m = new Matrix3f();
+        rotation.get(m);
+        
+        double radians = Math.acos(m.m00);
+        if(m.m02 < 0)
+        	radians = radians- 2*radians;
+        
+        return radians;
+    }
+    
+    public void setRotation(float r)
+    {
+    	Matrix3f m = new Matrix3f();
+        rotation.get(m);
+        
+        m.rotY(r);
+        rotation.set(m);
     }
 
 }

@@ -76,8 +76,8 @@ public class Grid
 	
 		if (node.y + 1 >= 0 && node.y + 1  < gridHeight) neighbours.add(nodes[node.x][node.y + 1]); // N
 		if (node.y - 1 >= 0 && node.y - 1  < gridHeight) neighbours.add(nodes[node.x][node.y - 1]); // S
-		if (node.x + 1 >= 0 && node.x + 1  < gridHeight) neighbours.add(nodes[node.x + 1][node.y]); // E
-		if (node.x - 1 >= 0 && node.x - 1  < gridHeight) neighbours.add(nodes[node.x - 1][node.y]); // W
+		if (node.x + 1 >= 0 && node.x + 1  < gridWidth) neighbours.add(nodes[node.x + 1][node.y]); // E
+		if (node.x - 1 >= 0 && node.x - 1  < gridWidth) neighbours.add(nodes[node.x - 1][node.y]); // W
 	
 	    return neighbours;
 	}

@@ -104,6 +104,37 @@ public class Zombie extends LivingEntity
 	
 	public void performBehavior() 
 	{
+		
+		//si x de point est plus grand faut aller à droite
+		Point p = getNextPoint();
+		if(p != null)
+		{
+			
+			System.out.println("point : " + p);
+			
+			Vector3f zombiePos = this.getPositionInGrid();
+			Point zombiePoint  = new Point((int)zombiePos.x, (int)zombiePos.z);
+			System.out.println("zombiePoint : " + zombiePoint);
+			
+			if(p.x > zombiePoint.x)
+				this.setRotation(0f);
+			else if(p.x < zombiePoint.x)
+			
+				this.setRotation(3f);
+			else
+			{
+				if(p.y > zombiePoint.y)
+				{
+					this.setRotation(-1.5f);	
+				}else
+				{
+					this.setRotation(1.5f);
+				}
+			}
+			
+			setTranslationalVelocity(ZOMBIE_RUNNING_SPEED);
+		}
+		
 		/*
 		setRotationalVelocity(0);
 		target.getCoords(playerPos);
