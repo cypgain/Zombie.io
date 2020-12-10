@@ -127,7 +127,8 @@ public class ZombieMap
 		{
 			for (int x = 0; x < boolMap[0].length; x++)
 			{
-				boolMap[y][x] = this.map[y][x] == 1 ? false : true;
+				boolean b = this.map[y][x] == 1;
+				boolMap[y][x] = !b;
 			}
 		}
 		

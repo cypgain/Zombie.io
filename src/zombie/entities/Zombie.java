@@ -68,24 +68,32 @@ public class Zombie extends LivingEntity
 		Point start  = new Point((int)zombiePos.x, (int)zombiePos.z);
 		Point target = new Point((int)playerPos.x, (int)playerPos.z);
 		
-		System.out.println("Width: " + map.length + " Height: " + map[0].length);
-		System.out.println("Start: " + start);
-		System.out.println("Dest: " + target);
+		//System.out.println("Width: " + map.length + " Height: " + map[0].length);
+		//System.out.println("Start: " + start);
+		//System.out.println("Dest: " + target);
 		
 		List<Point> path = PathFinding.findPath(grid, start, target, false);
 		
-		int[][] testPath = this.game.getEnv().getMap().getArrayMap();
-
+		int[][] initArray = this.game.getEnv().getMap().getArrayMap();
+		int[][] testPath  = new int[initArray.length][initArray[0].length];
 		
+		for(int lig = 0; lig < initArray.length; lig++)
+		{
+			for(int col = 0; col < initArray[0].length; col++)
+			{
+				testPath[lig][col] = initArray[lig][col];
+			}
+		}
+			
 		for (Point point : path)
 		{
-			System.out.println(point);
+			//System.out.println(point);
 			testPath[point.y][point.x] = 5;
 		}
 		
 		testPath[start.y][start.x] = 8;
 		testPath[target.y][target.x] = 9;
-		
+		/*
 		for (int y = 0; y < testPath.length; y++)
 		{
 			for (int x = 0; x < testPath[y].length; x++)
@@ -94,7 +102,7 @@ public class Zombie extends LivingEntity
 			}
 			
 			System.out.println();
-		}
+		}*/
 		
 		if (path.size() == 0)
 			return null;
@@ -110,26 +118,22 @@ public class Zombie extends LivingEntity
 		if(p != null)
 		{
 			
-			System.out.println("point : " + p);
+			//System.out.println("point : " + p);
 			
 			Vector3f zombiePos = this.getPositionInGrid();
 			Point zombiePoint  = new Point((int)zombiePos.x, (int)zombiePos.z);
-			System.out.println("zombiePoint : " + zombiePoint);
+			//System.out.println("zombiePoint : " + zombiePoint +  "   |   point : " + p);
 			
 			if(p.x > zombiePoint.x)
 				this.setRotation(0f);
 			else if(p.x < zombiePoint.x)
-			
-				this.setRotation(3f);
+				this.setRotation((float) Math.PI);
 			else
 			{
 				if(p.y > zombiePoint.y)
-				{
-					this.setRotation(-1.5f);	
-				}else
-				{
-					this.setRotation(1.5f);
-				}
+					this.setRotation(-(float)(Math.PI/2.0f));	
+				else
+					this.setRotation((float)(Math.PI/2.0f));
 			}
 			
 			setTranslationalVelocity(ZOMBIE_RUNNING_SPEED);

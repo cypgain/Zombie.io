@@ -76,7 +76,7 @@ public class PathFinding
 
             for (Node neighbour : neighbours) 
             {
-                if (!neighbour.walkable || closedSet.contains(neighbour)) continue;
+                if ( !(neighbour.walkable) || closedSet.contains(neighbour)) continue;
 
                 int newMovementCostToNeighbour = currentNode.gCost + getDistance(currentNode, neighbour) * (int) (10.0f * neighbour.price);
                 if (newMovementCostToNeighbour < neighbour.gCost || !openSet.contains(neighbour)) 

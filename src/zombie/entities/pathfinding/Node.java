@@ -21,7 +21,7 @@ public class Node
      */
     public Node(int x, int y, float price) 
     {
-        walkable = price != 0.0f;
+        walkable = price != -1.0f;
         this.price = price;
         this.x = x;
         this.y = y;
@@ -32,3 +32,4 @@ public class Node
         return gCost + hCost;
     }
 }
+

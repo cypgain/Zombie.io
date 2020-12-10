@@ -27,6 +27,7 @@
 package simbad.sim;
 
 
+import javax.media.j3d.BoundingBox;
 import javax.media.j3d.Bounds;
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Group;
@@ -201,7 +202,6 @@ public  abstract class BaseObject {
         return localBounds;
        // return group.getBounds();
     }
- 
     
  	 /**
 	  * Obtain  translation transform.

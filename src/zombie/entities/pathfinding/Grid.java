@@ -48,7 +48,10 @@ public class Grid
 	
 	    for (int x = 0; x < width; x++)
 	    	for (int y = 0; y < height; y++)
+	    	{
+	    		boolean b = walkableTiles[x][y];
 	    		nodes[x][y] = new Node(x, y, walkableTiles[x][y] ? 1.0f : 0.0f);
+	    	}	
 	}
 	
 	public List<Node> get8Neighbours(Node node) 
