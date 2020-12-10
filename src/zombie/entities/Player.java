@@ -18,6 +18,9 @@ public class Player extends LivingEntity
 	protected boolean isInvincible = false;
 	private final int INVINCIBILITY_TIME = 3000;
 	
+	private double direction;
+	
+	
 	public Player(Vector3d pos, Color3f color) 
 	{
 		super(100, 5, pos, "player", new Color3f(0f, 0.5f, 0.1f));
@@ -59,6 +62,7 @@ public class Player extends LivingEntity
 				System.out.println("POINT DE VIE : " + this.health);
 			}
 		}
+		this.direction = this.getRadians();
 	}
 	
 	private void invincibility()
