@@ -98,8 +98,8 @@ public class MouseOrbiter implements MouseInputListener {
      *            The transformgroup affected by mouse movement 
      */
     public MouseOrbiter(javax.media.j3d.Canvas3D c, TransformGroup targetTransformGroup) {
-        c.addMouseListener(this);
-        c.addMouseMotionListener(this);
+        //c.addMouseListener(this);
+        //c.addMouseMotionListener(this);
         this.targetTG = targetTransformGroup;
         targetTransform = new Transform3D();
         resetView();
