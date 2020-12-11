@@ -30,11 +30,16 @@ public class Zombie extends LivingEntity
 	private Point3d playerPos;
 	private Point3d zombiePos;
 	
+	private float redColor = 0.0f;
+	private float greenColor = 0.25f;
+	private float blueColor = 1f;
+	
+	
 	private ZombieGame game;
 
 	public Zombie(Vector3d pos, Player target) 
 	{
-		super(100, 5, pos, "zombie", new Color3f(0.3f, 0.2f, 0.7f), 0.25f);
+		super(100, 5, pos, "zombie", new Color3f(0.0f, 0.25f, 1f), 0.25f);
 		sonars = RobotFactory.addSonarBeltSensor(this, 12);
 		bumpers = RobotFactory.addBumperBeltSensor(this, 12);
 		this.target = target;
@@ -70,6 +75,31 @@ public class Zombie extends LivingEntity
 					setRotationalVelocity(-1);
 				else
 					setRotationalVelocity(1) ;
+			}
+		}
+		
+		if(anOtherAgentIsVeryNear())
+		{
+			SimpleAgent sa = getVeryNearAgent();
+			if(sa instanceof Bullet)
+			{
+				if(this.health <= 20)
+				{
+					ZombieGame.getInstance().getSimulator().removeAgent(this);
+				}
+				else
+				{
+					this.health -= 20;
+					this.redColor += 0.1f;
+					this.greenColor -= 0.05f;
+					this.blueColor -= 0.2f;
+					
+					this.color = new Color3f(redColor, greenColor, blueColor);
+					this.setColor(color);
+					
+				}
+				
+				ZombieGame.getInstance().getSimulator().removeAgent(sa);
 			}
 		}
 	}

@@ -38,15 +38,6 @@ public class Bullet extends Entity{
 			ZombieGame.getInstance().getSimulator().removeAgent(this);
 		}
 		
-		if(anOtherAgentIsVeryNear())
-		{
-			SimpleAgent sa = getVeryNearAgent();
-			if(sa instanceof Zombie)
-			{
-				System.out.println("u ded");
-				ZombieGame.getInstance().getSimulator().removeAgent(this);
-				ZombieGame.getInstance().getSimulator().removeAgent(sa);
-			}
-		}
+		
 	}
 }
