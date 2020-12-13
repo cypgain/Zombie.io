@@ -16,7 +16,7 @@ public class Player extends LivingEntity
 	private static Player instance;
 	
 	protected boolean isInvincible = false;
-	private final int INVINCIBILITY_TIME = 500;//3000
+	private final int INVINCIBILITY_TIME = 3000;
 	
 	public Player(Vector3d pos, Color3f color) 
 	{
@@ -53,14 +53,7 @@ public class Player extends LivingEntity
 				if(! this.isInvincible)
 				{
 					this.takeDamage(10);
-					
-					if(this.getHealth() <= 0){
-						System.out.println("mort");
-					}
-					else {
-						System.out.println("vie");
-						//invincibility();
-					}
+					invincibility();
 				}
 
 				System.out.println("POINT DE VIE : " + this.health);
