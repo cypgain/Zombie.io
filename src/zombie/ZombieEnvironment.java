@@ -17,6 +17,8 @@ public class ZombieEnvironment extends EnvironmentDescription
 	private List<Zombie> zombies;
 	private int currentRound;
 	private int zombiesThisRound;
+	private static ZombieEnvironment instance;
+	
 	
 	public ZombieEnvironment()
 	{
@@ -26,17 +28,23 @@ public class ZombieEnvironment extends EnvironmentDescription
 		this.currentMap = new ZombieMap("map");
 		this.currentMap.render(this);
 		
-		this.player = new Player(new Vector3d(0, 0.2f, 0), new Color3f(255,255,255));
+		this.player = new Player(new Vector3d(0, 0.2f, 0), new Color3f(0.9f,0.9f,0.9f));
 		this.add(this.player);
 		
 		this.zombies = new ArrayList<>();
 		this.currentRound = 1;
-		this.zombiesThisRound = 5;
+		this.zombiesThisRound = 1;
 		
 		ZombieSpawner spawner = new ZombieSpawner(this, this.currentMap.getSpawners());
+		
+		instance = this;
 		new Thread(spawner).start();
+		
 	}
-	
+	public static ZombieEnvironment getInstance()
+	{
+		return instance;
+	}
 	public void spawnZombie(Vector3d position)
 	{
 		Zombie zombie = new Zombie(position, this.player);
@@ -63,6 +71,11 @@ public class ZombieEnvironment extends EnvironmentDescription
 	public List<Zombie> getZombies()
 	{
 		return this.zombies;
+	}
+	
+	public void removeZombie(Zombie z)
+	{
+		this.zombies.remove(z);
 	}
 	
 }

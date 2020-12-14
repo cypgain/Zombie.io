@@ -3,6 +3,8 @@ package zombie;
 import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseListener;
 
 import javax.swing.ActionMap;
 import javax.swing.InputMap;
@@ -12,9 +14,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
+import org.w3c.dom.events.MouseEvent;
+
 import simbad.gui.WorldWindow;
 import simbad.sim.Simulator;
 import simbad.sim.World;
+import zombie.entities.Player;
 
 public class ZombieGame extends JFrame
 {
@@ -70,6 +75,7 @@ public class ZombieGame extends JFrame
 		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_S, 0), Actions.BACKWARD);
 		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_D, 0), Actions.LEFT);
 		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_Q, 0), Actions.RIGHT);
+		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, 0), Actions.SPACE);
 
 		// Register released keys
 		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_Z, 0, true), Actions.R_FORWARD);
@@ -104,5 +110,4 @@ public class ZombieGame extends JFrame
     {
     	new ZombieGame();
     }
-
 }

@@ -162,12 +162,20 @@ public class Simulator {
     
     public void addAgent(SimpleAgent agent)
     {
+    	objects.add(agent);
         agent.setSimulator(this);
         agent.setWorld(world);
         agent.create();
         agent.reset();
         agents.add(agent);
         world.addObjectToPickableSceneBranch(agent);   
+    }
+    
+    public void removeAgent(SimpleAgent agent)
+    {
+    	objects.remove(agent);
+    	agents.remove(agent);
+    	world.detach(agent);
     }
     
     /** Creates the UI that may be associated to each agent.
@@ -196,9 +204,10 @@ public class Simulator {
      * The main simulator method. It is called  cyclicaly or step by step. (see startSimulation).
      */
     public  synchronized void simulateOneStep() {
+    	
         // start critical section. only one thread.
         lock(); 
-        int nagents = agents.size();
+        
         
         // Print memory info (rarely)
         if (counter % 100000==0){
@@ -214,7 +223,7 @@ public class Simulator {
       
         
         // update sensors and actuators
-        for (int i = 0; i < nagents; i++) {
+        for (int i = 0; i < agents.size(); i++) {
             SimpleAgent a = ((SimpleAgent) agents.get(i));
             a.updateSensors(dt, world.getPickableSceneBranch());
             a.updateActuators(dt);
@@ -223,14 +232,15 @@ public class Simulator {
         }
  
         // perform behavior
-        for (int i = 0; i < nagents; i++) {
+        for (int i = 0; i < agents.size(); i++) {
             SimpleAgent a = ((SimpleAgent) agents.get(i));
             a.performPreBehavior();
             a.performBehavior();
            
         }
+        
         // Compute forces
-        for (int i = 0; i <  nagents; i++) {
+        for (int i = 0; i <  agents.size(); i++) {
             SimpleAgent a = ((SimpleAgent) agents.get(i));
             a.clearVeryNear();
             a.setMotorsAcceleration(dt);
@@ -247,7 +257,7 @@ public class Simulator {
             physicalEngine.checkAgentObjectPairs(agents,objects,true,false);
             
             // integrate position again  cause velocity may have changed due to impact.
-            for (int i = 0; i < nagents; i++) {
+            for (int i = 0; i < agents.size(); i++) {
                 SimpleAgent a = ((SimpleAgent) agents.get(i));
                 a.integratesPositionChange(dt);
             }
@@ -258,7 +268,7 @@ public class Simulator {
         physicalEngine.checkAgentObjectPairs(agents,objects,false,true);
     
         // Update position and all counters
-        for (int i = 0; i < nagents; i++) {
+        for (int i = 0; i < agents.size(); i++) {
             SimpleAgent a = ((SimpleAgent) agents.get(i));
             a.updatePosition();
             a.updateCounters(dt);
