@@ -65,7 +65,7 @@ public class Player extends LivingEntity
 					if(this.getHealth() <= 0){
 						ZombieGame.getInstance().getSimulator().stopSimulation();
 						String sMsg = "Partie terminée vous avez tenu : ";
-						sMsg += ZombieGame.getInstance().getEnv().getRound() + " " + (ZombieGame.getInstance().getEnv().getRound() > 1 ? "manches" : "manche");
+						sMsg += ZombieGame.getInstance().getEnv().getRound()-1 + " " + (ZombieGame.getInstance().getEnv().getRound()-1 > 1 ? "manches" : "manche");
 						JOptionPane.showMessageDialog(ZombieGame.getInstance(),  sMsg);
 						ZombieGame.getInstance().dispatchEvent(new WindowEvent(ZombieGame.getInstance(), WindowEvent.WINDOW_CLOSING));
 						
