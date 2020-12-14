@@ -61,16 +61,24 @@ public class Zombie extends LivingEntity
 		boolean[][] map = this.game.getEnv().getMap().getBoolMap();
 		
 		Vector3f zombiePos = this.getPositionInGrid();
+		System.out.println("Start: " + zombiePos);
 		Vector3f playerPos = this.target.getPositionInGrid();
+		System.out.println("Dest: " + playerPos);
 		
 		Grid grid = new Grid(map.length, map[0].length, map);
 		
-		Point start  = new Point((int)zombiePos.x, (int)zombiePos.z);
-		Point target = new Point((int)playerPos.x, (int)playerPos.z);
+		int pys = (int)zombiePos.z >= map.length ? map.length - 1 : (int)zombiePos.z < 0 ? 0 : (int)zombiePos.z;
+		int pxs = (int)zombiePos.x >= map[0].length ? map[0].length - 1 : (int)zombiePos.x < 0 ? 0 : (int)zombiePos.x;
+		
+		int pyt = (int)playerPos.z >= map.length ? map.length - 1 : (int)playerPos.z < 0 ? 0 : (int)playerPos.z;
+		int pxt = (int)playerPos.x >= map[0].length ? map[0].length - 1 : (int)playerPos.x < 0 ? 0 : (int)playerPos.x;
+		
+		
+		Point start  = new Point(pxs, pys);
+		Point target = new Point(pxt, pyt);
 		
 		//System.out.println("Width: " + map.length + " Height: " + map[0].length);
-		//System.out.println("Start: " + start);
-		//System.out.println("Dest: " + target);
+
 		
 		List<Point> path = PathFinding.findPath(grid, start, target, false);
 		
@@ -87,8 +95,10 @@ public class Zombie extends LivingEntity
 			
 		for (Point point : path)
 		{
+			int py = point.y >= testPath.length ? testPath.length - 1 : point.y < 0 ? 0 : point.y;
+			int px = point.x >= testPath[0].length ? testPath[0].length - 1 : point.x < 0 ? 0 : point.x;
 			//System.out.println(point);
-			testPath[point.y][point.x] = 5;
+			testPath[py][px] = 5;
 		}
 		
 		testPath[start.y][start.x] = 8;
