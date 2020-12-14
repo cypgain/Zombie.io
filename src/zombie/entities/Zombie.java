@@ -14,6 +14,7 @@ import java.util.List;
 import simbad.sim.RangeSensorBelt;
 import simbad.sim.RobotFactory;
 import simbad.sim.SimpleAgent;
+import zombie.ZombieEnvironment;
 import zombie.ZombieGame;
 
 
@@ -100,6 +101,7 @@ public class Zombie extends LivingEntity
 				}
 				
 				ZombieGame.getInstance().getSimulator().removeAgent(sa);
+				ZombieEnvironment.getInstance().removeZombie(this);
 			}
 		}
 	}
