@@ -65,4 +65,8 @@ public class ZombieEnvironment extends EnvironmentDescription
 		return this.zombies;
 	}
 	
+	public int getRound()
+	{
+		return this.currentRound;
+	}
 }
