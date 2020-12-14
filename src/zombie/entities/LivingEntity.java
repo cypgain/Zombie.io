@@ -1,23 +1,22 @@
 package zombie.entities;
 
+import javax.media.j3d.Transform3D;
 import javax.vecmath.Color3f;
+import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;
+import javax.vecmath.Vector3f;
 
 public class LivingEntity extends Entity
 {
-
-	protected Color3f color;
 	protected int health;
 	protected int speed;
 	
 	
-	
-	public LivingEntity(int defaultHealth, int speed, Vector3d pos, String name, Color3f color)
+	public LivingEntity(int defaultHealth, int speed, Vector3d pos, String name, Color3f color, float radius)
 	{
-		super(pos, name);
+		super(pos, name, color, radius);
 		this.health = defaultHealth;
 		this.speed = speed;
-		this.color = color;
 	}
 	
 	public int getHealth()
@@ -36,7 +35,6 @@ public class LivingEntity extends Entity
 		this.setHealth(health-damage);
 		this.setColor(color);
 	}
-	
 	
 	
 }

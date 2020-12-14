@@ -11,5 +11,6 @@ public enum Actions
 	R_LEFT,
 	RIGHT,
 	R_RIGHT,
+	SPACE,
 	;
 }
