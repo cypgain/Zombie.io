@@ -1,9 +1,11 @@
 package zombie.entities;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowEvent;
 
 import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
+import javax.swing.JOptionPane;
 import javax.vecmath.Color3f;
 import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;
@@ -58,11 +60,21 @@ public class Player extends LivingEntity
 			{
 				if(! this.isInvincible)
 				{
+					
 					this.takeDamage(10);
-					invincibility();
+					if(this.getHealth() <= 0){
+						ZombieGame.getInstance().getSimulator().stopSimulation();
+						String sMsg = "Partie terminée vous avez tenu : ";
+						sMsg += ZombieGame.getInstance().getEnv().getRound() + " " + (ZombieGame.getInstance().getEnv().getRound() > 1 ? "manches" : "manche");
+						JOptionPane.showMessageDialog(ZombieGame.getInstance(),  sMsg);
+						ZombieGame.getInstance().dispatchEvent(new WindowEvent(ZombieGame.getInstance(), WindowEvent.WINDOW_CLOSING));
+						
+					}
+					else {
+						invincibility();
+					}
+					System.out.println("POINT(S) DE VIE : " + this.health);
 				}
-
-				System.out.println("POINT DE VIE : " + this.health);
 			}
 		}
 		this.direction = this.getRadians();
@@ -74,8 +86,6 @@ public class Player extends LivingEntity
 		{
 			public void run() 
 			{
-				
-				System.out.println("START INvincible");
 				Player instance = Player.getInstance();
 				instance.isInvincible = true;
 				try 
