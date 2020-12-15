@@ -36,11 +36,13 @@ public class LivingEntity extends Entity
 	public void takeDamage(int damage)
 	{
 		this.setColor(new Color3f(1f, 0f, 0f));
-		this.setHealth(health-damage);
+		this.setHealth(health-damage); // on diminue la vie de la LivingEntity
 		this.setColor(color);
 	}
 	
 
+	//Methode qui retourne la position en suivant le format d'un tableau 
+	//Ex : si le joueur est en haut à gauche cette méthode retourne x = 0 et z = 0
 	public Vector3f getPositionInGrid()
 	{
 		Vector3f gridPos = new Vector3f(0f, 0f, 0f);

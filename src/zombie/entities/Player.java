@@ -52,17 +52,19 @@ public class Player extends LivingEntity
 	
 	public void performBehavior() 
 	{
+		
 		if(anOtherAgentIsVeryNear())
 		{
 			
 			SimpleAgent sa = getVeryNearAgent();
-			if(sa instanceof Zombie)
+			if(sa instanceof Zombie)//si le joueur se fait toucher par un Zombie
 			{
-				if(! this.isInvincible)
+				if(! this.isInvincible) //S'il n'est pas en mode invincible
 				{
 					
 					this.takeDamage(10);
-					if(this.getHealth() <= 0){
+					if(this.getHealth() <= 0) // S'il n'a plus de vie
+					{
 						ZombieGame.getInstance().getSimulator().stopSimulation();
 						String sMsg = "Partie terminée vous avez tenu : ";
 						sMsg += ZombieGame.getInstance().getEnv().getRound()-1 + " " + (ZombieGame.getInstance().getEnv().getRound()-1 > 1 ? "manches" : "manche");
@@ -80,6 +82,7 @@ public class Player extends LivingEntity
 		this.direction = this.getRadians();
 	}
 	
+	//Méthode qui crée un nouveau Thread permettant de gérer l'invincibilité du joueur
 	private void invincibility()
 	{
 		Thread tInvincibility = new Thread(new Runnable() 
@@ -104,12 +107,15 @@ public class Player extends LivingEntity
 	{
 		Point3d p = new Point3d();
 		this.getCoords(p);
+		
+		//On crée une Bullet qui part depuis le joueur dans la direction ou regarde le joueur
 		Bullet b = new Bullet(new Vector3d(p.getX(), p.getY(), p.getZ()), "Bullet", new Color3f(1f,1f,0f), 0.1f);	
 		Simulator sim = ZombieGame.getInstance().getSimulator();
 		sim.addAgent(b);
 	}
 	
 	
+	//Permet le déplacement du joueur
 	@SuppressWarnings("serial")
 	private void registerActions()
 	{

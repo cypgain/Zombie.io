@@ -64,6 +64,8 @@ public class Zombie extends LivingEntity
 		this.game = ZombieGame.getInstance();
 	}
 	
+	
+	//Méthode qui retourne le prochain point où doit aller le Zombie (indiqué par l'algorithme de PathFinding)
 	public Point getNextPoint()
 	{		
 		boolean[][] map = this.game.getEnv().getMap().getBoolMap();
@@ -109,16 +111,6 @@ public class Zombie extends LivingEntity
 		
 		testPath[start.y][start.x] = 8;
 		testPath[target.y][target.x] = 9;
-		/*
-		for (int y = 0; y < testPath.length; y++)
-		{
-			for (int x = 0; x < testPath[y].length; x++)
-			{
-				System.out.print(testPath[y][x]);
-			}
-			
-			System.out.println();
-		}*/
 		
 		if (path.size() == 0)
 			return null;
@@ -130,11 +122,9 @@ public class Zombie extends LivingEntity
 	public void performBehavior() 
 	{
 		
-		//si x de point est plus grand faut aller ï¿½ droite
 		Point p = getNextPoint();
-		if(p != null)
+		if(p != null) //On déplace le zombie vers le point indiqué
 		{
-			
 			//System.out.println("point : " + p);
 			
 			Vector3f zombiePos = this.getPositionInGrid();
@@ -156,29 +146,7 @@ public class Zombie extends LivingEntity
 			setTranslationalVelocity(ZOMBIE_RUNNING_SPEED);
 		}
 		
-		/*
-		setRotationalVelocity(0);
-		target.getCoords(playerPos);
-		this.getCoords(zombiePos);
-		
-		setTranslationalVelocity(ZOMBIE_WALKING_SPEED);
-		
-		if (sonars.oneHasHit())
-		{
-			double left = sonars.getFrontLeftQuadrantMeasurement();
-			double right = sonars.getFrontRightQuadrantMeasurement();
-			double front = sonars.getFrontQuadrantMeasurement();
-			
-			if ((front > 0.1)||(left > 0.1)||(right > 0.1)) 
-			{
-				if (left < right)
-					setRotationalVelocity(-1);
-				else
-					setRotationalVelocity(1) ;
-			}
-		}*/
-		
-		if(anOtherAgentIsVeryNear())
+		if(anOtherAgentIsVeryNear()) //Si le zombie est touché par une Bullet
 		{
 			SimpleAgent sa = getVeryNearAgent();
 			if(sa instanceof Bullet)

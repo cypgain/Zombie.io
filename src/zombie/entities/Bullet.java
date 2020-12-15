@@ -33,6 +33,8 @@ public class Bullet extends Entity{
 		this.setTranslationalVelocity(15);
 		this.setRotation(initialRotation);
 		
+
+		//Si on detecte une collision avec un mur par exemple, on supprime la Bullet.
 		if(this.collisionDetected())
 		{
 			ZombieGame.getInstance().getSimulator().removeAgent(this);
