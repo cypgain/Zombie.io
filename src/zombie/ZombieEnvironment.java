@@ -56,6 +56,8 @@ public class ZombieEnvironment extends EnvironmentDescription
 	{
 		currentRound++;
 		zombiesThisRound += 2;
+		System.out.println(" Nouvelle manche ! zombies à éliminer : " + zombiesThisRound);
+		
 	}
 	
 	public int getZombiesThisRound()
