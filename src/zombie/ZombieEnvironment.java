@@ -33,7 +33,7 @@ public class ZombieEnvironment extends EnvironmentDescription
 		
 		this.zombies = new ArrayList<>();
 		this.currentRound = 1;
-		this.zombiesThisRound = 1;
+		this.zombiesThisRound = 3;
 		
 		ZombieSpawner spawner = new ZombieSpawner(this, this.currentMap.getSpawners());
 		

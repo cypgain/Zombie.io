@@ -6,6 +6,10 @@ import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;
 import javax.vecmath.Vector3f;
 
+import zombie.ZombieGame;
+import zombie.ZombieMap;
+
+
 public class LivingEntity extends Entity
 {
 	protected int health;
@@ -36,5 +40,23 @@ public class LivingEntity extends Entity
 		this.setColor(color);
 	}
 	
+
+	public Vector3f getPositionInGrid()
+	{
+		Vector3f gridPos = new Vector3f(0f, 0f, 0f);
+		Vector3f realPos = this.getTranslation();
+		
+		ZombieMap map = ZombieGame.getInstance().getEnv().getMap();
+		
+		int startX = map.getArrayMap().length / 2;
+		int startY = map.getArrayMap()[0].length / 2;
+		
+		gridPos.x = (float) (Math.floor(realPos.x) + startX);
+		gridPos.y = realPos.y;
+		gridPos.z = (float) (Math.floor(realPos.z) + startY - 1);
+		
+		return gridPos;
+	}
+
 	
 }
