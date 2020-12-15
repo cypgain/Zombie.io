@@ -48,6 +48,9 @@ public class ZombieGame extends JFrame
         this.setVisible(true);
     }
     
+    /**
+     * Permet de commencer la partie
+     */
     private void start()
     {
         this.env = new ZombieEnvironment();
@@ -66,6 +69,9 @@ public class ZombieGame extends JFrame
 		this.add(panel);
     }
     
+    /**
+     * Permet d'enregistrer les touches du jeu
+     */
     private void registerKeys()
     {
     	InputMap inputMap = getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);

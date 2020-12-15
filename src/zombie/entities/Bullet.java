@@ -25,7 +25,6 @@ public class Bullet extends Entity{
 		this.bumpers = RobotFactory.addBumperBeltSensor(this, 12);
 		
 		this.initialRotation = (float) Player.getInstance().getRadians();
-		
 	}
 	
 	public void performBehavior()

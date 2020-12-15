@@ -1,6 +1,9 @@
 package zombie;
 
-// R_ prefix is for released
+/**
+ * Enumeration des touches possibles
+ * Le prefix R permet de determiner si la touche à été release
+ */
 public enum Actions 
 {
 	FORWARD,

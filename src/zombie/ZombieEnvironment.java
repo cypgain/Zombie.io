@@ -41,10 +41,16 @@ public class ZombieEnvironment extends EnvironmentDescription
 		new Thread(spawner).start();
 		
 	}
+	
 	public static ZombieEnvironment getInstance()
 	{
 		return instance;
 	}
+	
+	/**
+	 * Permet de faire spawn un zombie à une position donnée
+	 * @param position
+	 */
 	public void spawnZombie(Vector3d position)
 	{
 		Zombie zombie = new Zombie(position, this.player);
@@ -52,6 +58,9 @@ public class ZombieEnvironment extends EnvironmentDescription
 		ZombieGame.getInstance().getSimulator().addAgent(zombie);
 	}
 	
+	/**
+	 * Permet de passer au round suivant
+	 */
 	public void nextRound()
 	{
 		currentRound++;
@@ -60,6 +69,10 @@ public class ZombieEnvironment extends EnvironmentDescription
 		
 	}
 	
+	/**
+	 * Permet de recuperer le nombre de zombies sur la vague actuelle
+	 * @return int
+	 */
 	public int getZombiesThisRound()
 	{
 		return this.zombiesThisRound;
@@ -74,10 +87,12 @@ public class ZombieEnvironment extends EnvironmentDescription
 	{
 		return this.zombies;
 	}
+	
 	public int getRound()
 	{
 		return this.currentRound;
 	}
+	
 	public void removeZombie(Zombie z)
 	{
 		this.zombies.remove(z);
