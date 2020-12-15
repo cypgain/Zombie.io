@@ -176,7 +176,7 @@ public class Zombie extends LivingEntity
 				else
 					setRotationalVelocity(1) ;
 			}
-		}
+		}*/
 		
 		if(anOtherAgentIsVeryNear())
 		{
@@ -203,7 +203,6 @@ public class Zombie extends LivingEntity
 				ZombieEnvironment.getInstance().removeZombie(this);
 			}
 		}
-		*/
 
 	}
 	
