@@ -75,6 +75,10 @@ public class ZombieGame extends JFrame
 		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_S, 0), Actions.BACKWARD);
 		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_D, 0), Actions.LEFT);
 		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_Q, 0), Actions.RIGHT);
+		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0), Actions.FORWARD);
+		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0), Actions.BACKWARD);
+		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0), Actions.LEFT);
+		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0), Actions.RIGHT);
 		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, 0), Actions.SPACE);
 
 		// Register released keys
@@ -82,6 +86,10 @@ public class ZombieGame extends JFrame
 		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_S, 0, true), Actions.R_BACKWARD);
 		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_D, 0, true), Actions.R_LEFT);
 		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_Q, 0, true), Actions.R_RIGHT);
+		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0, true), Actions.R_FORWARD);
+		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0, true), Actions.R_BACKWARD);
+		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0, true), Actions.R_LEFT);
+		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0, true), Actions.R_RIGHT);
 		
 		this.actionMap = getRootPane().getActionMap();
     }
